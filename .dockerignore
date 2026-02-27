@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+.venv
+__pycache__
+*.pyc
+.cursor
+.ruff_cache
+tests
+auth-service-docs.md
+AGENTS.md
