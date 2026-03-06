@@ -34,12 +34,9 @@ async def update_user_profile(
     db: AsyncSession,
     user: User,
     username: str | None = None,
-    avatar_url: str | None = None,
 ) -> User:
     if username is not None:
         user.username = username
-    if avatar_url is not None:
-        user.avatar_url = avatar_url
     await db.commit()
     await db.refresh(user)
     return user
@@ -52,6 +49,7 @@ async def change_user_role(db: AsyncSession, user_id: uuid.UUID, new_role: UserR
     user.role = new_role
     await db.commit()
     await db.refresh(user)
+    print("aaaaaaa" * 100, user.role)
     return user
 
 

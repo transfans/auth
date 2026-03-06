@@ -10,8 +10,6 @@ class UserResponse(BaseModel):
     id: uuid.UUID
     email: EmailStr
     username: str
-    role: UserRole
-    avatar_url: str | None
     is_active: bool
     created_at: datetime
 
@@ -22,14 +20,12 @@ class PublicUserResponse(BaseModel):
     id: uuid.UUID
     username: str
     role: UserRole
-    avatar_url: str | None
 
     model_config = {"from_attributes": True}
 
 
 class UpdateUserRequest(BaseModel):
     username: str | None = None
-    avatar_url: str | None = None
 
 
 class ChangeRoleRequest(BaseModel):

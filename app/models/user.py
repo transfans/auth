@@ -19,7 +19,6 @@ class User(Base):
     role: Mapped[UserRole] = mapped_column(
         Enum(UserRole, name="userrole", native_enum=True), nullable=False, default=UserRole.user
     )
-    avatar_url: Mapped[str | None] = mapped_column(String, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     token_version: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
