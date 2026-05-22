@@ -31,7 +31,18 @@ async def register(body: RegisterRequest, db: AsyncSession = Depends(get_db)) ->
 
 @router.post("/login", response_model=TokenPair)
 async def login(body: LoginRequest, db: AsyncSession = Depends(get_db)) -> TokenPair:
-    _user, tokens = await auth_service.login(db, body.email, body.password)
+    user, tokens = await auth_service.login(db, body.email, body.password)
+
+    await publish_event(
+        "user.login",
+        {
+            "user_id": str(user.id),
+            "email": user.email,
+            "username": user.username,
+            "role": user.role.value,
+        },
+    )
+
     return tokens
 
 

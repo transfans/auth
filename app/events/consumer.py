@@ -21,7 +21,7 @@ async def _handle_creator_activated(message: aio_pika.abc.AbstractIncomingMessag
         try:
             body = json.loads(message.body)
             user_id = uuid.UUID(body["data"]["user_id"])
-            logger.info("Processing creator.activated for user %s", user_id)
+            print("Processing creator.activated for user %s", user_id)
             async with async_session_factory() as db:
                 user = await change_user_role(db, user_id, UserRole.creator)
                 if user:
@@ -41,7 +41,6 @@ async def start_consuming() -> None:
 
     try:
         queue = await channel.get_queue(QUEUE_NAME)
-        print("!!!" * 100)
         _consumer_tag = await queue.consume(_handle_creator_activated)
         logger.info("Started consuming from %s", QUEUE_NAME)
     except Exception:
