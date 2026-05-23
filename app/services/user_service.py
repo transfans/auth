@@ -54,7 +54,5 @@ async def change_user_role(db: AsyncSession, user_id: uuid.UUID, new_role: UserR
 
 
 async def increment_token_version(db: AsyncSession, user_id: uuid.UUID) -> None:
-    await db.execute(
-        update(User).where(User.id == user_id).values(token_version=User.token_version + 1)
-    )
+    await db.execute(update(User).where(User.id == user_id).values(token_version=User.token_version + 1))
     await db.commit()

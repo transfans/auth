@@ -23,9 +23,7 @@ def create_access_token(
     token_version: int,
     expires_delta: timedelta | None = None,
 ) -> str:
-    expire = datetime.now(UTC) + (
-        expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    )
+    expire = datetime.now(UTC) + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
     payload = {
         "sub": str(user_id),
         "role": role.value,

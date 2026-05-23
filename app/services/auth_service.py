@@ -97,16 +97,12 @@ async def refresh(db: AsyncSession, raw_refresh_token: str) -> TokenPair:
 
 async def logout(db: AsyncSession, raw_refresh_token: str) -> None:
     token_hash = hash_token(raw_refresh_token)
-    await db.execute(
-        update(RefreshToken).where(RefreshToken.token_hash == token_hash).values(is_revoked=True)
-    )
+    await db.execute(update(RefreshToken).where(RefreshToken.token_hash == token_hash).values(is_revoked=True))
     await db.commit()
 
 
 async def logout_all_devices(db: AsyncSession, user_id: uuid.UUID) -> None:
-    await db.execute(
-        update(RefreshToken).where(RefreshToken.user_id == user_id).values(is_revoked=True)
-    )
+    await db.execute(update(RefreshToken).where(RefreshToken.user_id == user_id).values(is_revoked=True))
     await increment_token_version(db, user_id)
 
 

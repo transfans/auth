@@ -31,8 +31,9 @@ async def test_login_success_returns_tokens(monkeypatch, auth_client, sample_use
 
 @pytest.mark.asyncio
 async def test_login_failure_returns_401(monkeypatch, auth_client):
-    from app.api import auth as auth_api
     from fastapi import HTTPException
+
+    from app.api import auth as auth_api
 
     monkeypatch.setattr(
         auth_api.auth_service,
@@ -52,8 +53,9 @@ async def test_login_failure_returns_401(monkeypatch, auth_client):
 
 @pytest.mark.asyncio
 async def test_refresh_invalid_token_returns_401(monkeypatch, auth_client):
-    from app.api import auth as auth_api
     from fastapi import HTTPException
+
+    from app.api import auth as auth_api
 
     monkeypatch.setattr(
         auth_api.auth_service,

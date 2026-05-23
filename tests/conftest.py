@@ -1,7 +1,7 @@
+import sys
 from collections.abc import AsyncGenerator
 from datetime import UTC, datetime
 from pathlib import Path
-import sys
 from uuid import uuid4
 
 import pytest
